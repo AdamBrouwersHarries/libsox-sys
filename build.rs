@@ -26,33 +26,4 @@ fn main() {
     bindings
         .write_to_file(out_path.join("bindings.rs"))
         .expect("Couldn't write bindings!");
-
-    // Download some data for our tests.
-    let testdata_url =
-        "https://archive.org/download/78_little-brown-jug_glenn-miller-and-his-orchestra-glenn-miller_gbia0015205a/Little%20Brown%20Jug%20-%20Glenn%20Miller%20and%20his%20Orchestra.mp3";
-
-    let mut testdata_folder = PathBuf::from(env!("CARGO_MANIFEST_DIR"));
-    testdata_folder.push("data");
-
-    let mut testdata_file = PathBuf::from(env!("CARGO_MANIFEST_DIR"));
-    testdata_file.push("data/test.mp3");
-
-    if !testdata_file.as_path().exists() {
-        let command = format!(
-            "mkdir -p {}; wget {} -O {}",
-            testdata_folder.to_str().unwrap(),
-            testdata_url,
-            testdata_file.to_str().unwrap()
-        );
-
-        println!("Running command: {}", command);
-
-        let output = Command::new("sh")
-            .arg("-c")
-            .arg(command)
-            .output()
-            .expect("failed to execute process");
-
-        assert!(output.status.success());
-    }
 }
