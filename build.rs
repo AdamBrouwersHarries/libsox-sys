@@ -1,9 +1,7 @@
 extern crate bindgen;
 
 use std::env;
-use std::path::Path;
 use std::path::PathBuf;
-use std::process::Command;
 
 fn main() {
     // tell cargo to tell rust to link the system libsox shared library
